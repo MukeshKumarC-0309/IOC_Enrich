@@ -1,0 +1,59 @@
+indicator,type,expected_category,source,notes
+162.243.103.246,ip,malicious,Feodo Tracker,Confirmed botnet C2 (QakBot family) - high confidence
+178.62.3.223,ip,malicious,Feodo Tracker,Confirmed botnet C2 - high confidence
+27.133.154.218,ip,malicious,Feodo Tracker,Confirmed botnet C2 - high confidence
+34.204.119.63,ip,malicious,Feodo Tracker,Confirmed botnet C2 (QakBot family) - high confidence
+50.16.16.211,ip,malicious,Feodo Tracker,Confirmed botnet C2 (QakBot family) - high confidence
+39.90.149.223,ip,malicious,URLhaus,Mozi botnet malware host - online at pull time
+191.44.112.89,ip,malicious,URLhaus,Mirai botnet payload host (many arch variants) - online at pull time
+43.228.157.73,ip,malicious,URLhaus,IoT malware deploy script host - online at pull time
+91.92.242.236,ip,malicious,URLhaus,Amadey-dropped payload host - repeated hits, mixed online/offline
+31.77.227.115,ip,malicious,URLhaus,Mirai botnet host (Android/ARM variants) - online at pull time
+31.77.227.119,ip,malicious,URLhaus,Mirai botnet host (SSH bruteforce tag) - offline at pull time
+61.53.202.74,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+182.124.9.99,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+115.48.146.252,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+42.230.30.16,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+198.144.179.82,ip,malicious,URLhaus,Mirai botnet host - offline at pull time
+62.60.226.140,ip,malicious,URLhaus,Amadey-dropped payload host - offline at pull time
+222.137.19.202,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+113.228.208.46,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+182.124.162.58,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+27.215.84.16,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+115.55.10.187,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+123.14.57.190,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+61.53.218.29,ip,malicious,URLhaus,Mozi botnet host - online at pull time
+217.60.241.32,ip,malicious,URLhaus,Fake ScreenConnect/RMM installer host - online at pull time
+217.60.241.248,ip,malicious,URLhaus,Fake ScreenConnect/RMM installer host - online at pull time
+217.60.241.142,ip,malicious,URLhaus,Fake ScreenConnect/RMM installer host - online at pull time
+77.83.39.9,ip,malicious,URLhaus,Fake ConnectWise installer host - online at pull time
+77.83.39.66,ip,malicious,URLhaus,Fake ScreenConnect installer host - online at pull time
+94.154.32.238,ip,malicious,URLhaus,PowerShell payload host - online at pull time
+62.60.249.165,ip,malicious,URLhaus,Mirai botnet host (many arch variants) - online at pull time
+45.38.249.63,ip,malicious,URLhaus,Geofenced Mirai botnet host (USA-targeted) - online at pull time
+2.26.81.46,ip,malicious,URLhaus,Mirai botnet host - online at pull time
+newstan.online,domain,malicious,URLhaus,Active malware payload distribution domain - online at pull time
+lomeqpe.com,domain,malicious,URLhaus,RemusStealer-linked payload domain - online at pull time
+thu-iphone-07.cfd,domain,malicious,URLhaus,Malware dropper domain - offline at pull time
+revengegrompegroups.pl,domain,malicious,URLhaus,Malware dropper domain - offline at pull time
+8.8.8.8,ip,benign,Google Public DNS,Stable, non-abusable resolver infrastructure
+8.8.4.4,ip,benign,Google Public DNS,Stable, non-abusable resolver infrastructure
+1.1.1.1,ip,benign,Cloudflare,Stable public DNS resolver
+1.0.0.1,ip,benign,Cloudflare,Stable public DNS resolver
+9.9.9.9,ip,benign,Quad9,Stable public DNS resolver
+208.67.222.222,ip,benign,OpenDNS,Stable public DNS resolver
+208.67.220.220,ip,benign,OpenDNS,Stable public DNS resolver
+4.2.2.2,ip,benign,Level3/CenturyLink,Long-standing public DNS resolver
+168.63.129.16,ip,benign,Microsoft Azure,Azure platform infrastructure IP
+13.107.42.14,ip,benign,Microsoft,Microsoft infrastructure IP
+142.250.80.14,ip,benign,Google,Google infrastructure IP
+151.101.1.140,ip,benign,Fastly,Fastly CDN edge IP
+104.16.132.229,ip,benign,Cloudflare,Cloudflare CDN edge IP
+199.232.28.133,ip,benign,Fastly,Fastly CDN edge IP
+google.com,domain,benign,N/A,Major public domain
+cloudflare.com,domain,benign,N/A,Major public domain
+microsoft.com,domain,benign,N/A,Major public domain
+apple.com,domain,benign,N/A,Major public domain
+wikipedia.org,domain,benign,N/A,Major public domain
+github.com,domain,benign,N/A,Major public domain
+mozilla.org,domain,benign,N/A,Major public domain

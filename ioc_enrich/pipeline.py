@@ -1,0 +1,65 @@
+"""Orchestrator — run one indicator through the full enrichment pipeline.
+
+Linear, no decision logic of its own (all decisions live in the modules it
+calls):
+
+    classify -> query sources -> aggregate -> ATT&CK map -> recommend -> report
+
+AbuseIPDB is queried only for IPs (§10.A); for a domain it is passed through as
+``None`` and rendered ``not_applicable`` by :mod:`ioc_enrich.report`.
+"""
+from __future__ import annotations
+
+from .aggregate import aggregate
+from .attack import map_techniques
+from .clients import abuseipdb, urlhaus, virustotal
+from .indicator import IP, classify
+from .recommend import recommend
+from .report import build_report
+
+
+def enrich(indicator: str) -> dict:
+    """Enrich a single IP or domain and return the §7 report dict.
+
+    Raises ``ValueError`` if ``indicator`` is neither a valid IP nor domain.
+    """
+    indicator_type, target = classify(indicator)
+
+    # --- Query the sources ---------------------------------------------------
+    # AbuseIPDB is IP-only; skip it for domains (§10.A).
+    abuse_result = abuseipdb.check(target) if indicator_type == IP else None
+    vt_result = virustotal.check(target, indicator_type)
+    urlhaus_result = urlhaus.check(target)
+
+    # --- Aggregate (verdict / confidence / flags) ----------------------------
+    agg = aggregate(indicator_type, abuse_result, vt_result, urlhaus_result)
+
+    # --- ATT&CK mapping ------------------------------------------------------
+    # Evaluated on RAW source signals only — fully decoupled from aggregate.py
+    # (§10.C Rule 3). urlhaus_match is read straight from the raw URLhaus
+    # result, NOT from agg.urlhaus_override, even though they coincide.
+    categories = (
+        abuse_result["raw"]["categories"]
+        if abuse_result is not None and abuse_result["ok"]
+        else []
+    )
+    urlhaus_match = bool(
+        urlhaus_result is not None
+        and urlhaus_result["ok"]
+        and urlhaus_result["raw"]["listed"]
+    )
+    urlhaus_url_count = urlhaus_result["raw"]["url_count"] if urlhaus_match else 0
+    techniques = map_techniques(categories, urlhaus_match, urlhaus_url_count)
+
+    # --- Recommendation + final report ---------------------------------------
+    recommendation = recommend(agg)
+    return build_report(
+        indicator=target,
+        indicator_type=indicator_type,
+        abuse_result=abuse_result,
+        vt_result=vt_result,
+        urlhaus_result=urlhaus_result,
+        agg=agg,
+        mitre_technique=techniques,
+        recommendation=recommendation,
+    )

@@ -1,0 +1,25 @@
+# Secrets / credentials — never commit real API keys
+.env
+*.env
+!.env.example
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Logs and local run artifacts (may hold API responses)
+*.log
+
+# Editor / OS cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
