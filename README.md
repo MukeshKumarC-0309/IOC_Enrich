@@ -17,6 +17,8 @@ ATT&CK techniques, and prints an analyst-readable triage recommendation.
   T1071 (Application Layer Protocol / C2).
 - **Human or JSON output** — a formatted, color-coded terminal view by default;
   raw JSON with `--json` for scripting.
+- **Analyst-friendly input** — accepts defanged indicators (`evil[.]com`,
+  `hxxp://bad[.]site`), normalizing them before lookup.
 
 ## Requirements
 
@@ -152,6 +154,8 @@ verify.py              # verification harness (pass/fail vs labels)
 evaluate.py            # evaluation harness (capture + offline metrics)
 EVAL.md                # generated evaluation report
 phase4_test_indicators.csv   # labelled known-good / known-bad indicators
+tests/                 # unit tests for the deterministic core (pytest)
+requirements-dev.txt   # test dependencies
 ```
 
 ## Verification
@@ -184,3 +188,14 @@ threshold sweeps quantify why aggregation is needed — at their default
 thresholds AbuseIPDB alone reaches only 0.06 recall and VirusTotal alone 0.43,
 versus 0.973 for the combined pipeline at no precision cost. Full breakdown in
 [`EVAL.md`](EVAL.md).
+
+## Testing
+
+Unit tests cover the deterministic core — thresholds, the aggregation truth
+table, ATT&CK mapping, the recommendation lookup, and indicator/defang
+handling — offline, no network or API keys:
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest
+```

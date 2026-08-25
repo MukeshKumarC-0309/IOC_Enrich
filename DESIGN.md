@@ -365,3 +365,13 @@ hidden knobs). Decided by the project owner on 2026-08-06.
   state (no information gained).
 - **IPv6** is accepted by the indicator classifier; both AbuseIPDB and
   VirusTotal support IPv6 lookups.
+
+### 10.H Input normalization (defang)
+
+Indicators are **refanged** before validation: analysts share IOCs defanged
+(`evil[.]com`, `hxxp://bad[.]site`, `1[.]2[.]3[.]4`) so a live one isn't
+clicked by accident. The classifier normalizes bracketed dots/colons,
+`hxxp(s)` scheme mangling, a URL scheme + path, a trailing `:port`, and
+whitespace, then validates. Refanging is **conservative** — unrecognized input
+passes through unchanged, so genuine indicators are unaffected. The report
+shows the normalized (refanged) indicator.
