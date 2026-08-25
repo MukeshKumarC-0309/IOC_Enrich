@@ -1,0 +1,2010 @@
+{
+  "captured_at": "2026-08-25T14:46:14+00:00",
+  "count": 58,
+  "indicators": [
+    {
+      "indicator": "162.243.103.246",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "Feodo Tracker",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            14,
+            15,
+            19,
+            21
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 18,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "178.62.3.223",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "Feodo Tracker",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 8,
+          "categories": [
+            14,
+            15,
+            19,
+            21
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 3,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "27.133.154.218",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "Feodo Tracker",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            14
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 6,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "34.204.119.63",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "Feodo Tracker",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 8,
+          "categories": [
+            14,
+            15,
+            18,
+            22
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 1,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "50.16.16.211",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "Feodo Tracker",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 15,
+          "categories": [
+            14,
+            15,
+            18,
+            21,
+            22
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 4,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "39.90.149.223",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 57,
+          "categories": [
+            14,
+            15,
+            18,
+            19,
+            20,
+            21,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 14,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 4
+        }
+      }
+    },
+    {
+      "indicator": "191.44.112.89",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 1,
+          "categories": [
+            20,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 6,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 17
+        }
+      }
+    },
+    {
+      "indicator": "43.228.157.73",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 100,
+          "categories": [
+            14,
+            15,
+            18,
+            19,
+            20,
+            21,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 16,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "91.92.242.236",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 8,
+          "categories": [
+            4,
+            9,
+            15,
+            18,
+            19,
+            20
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 20,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 910
+        }
+      }
+    },
+    {
+      "indicator": "31.77.227.115",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 9,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 3
+        }
+      }
+    },
+    {
+      "indicator": "31.77.227.119",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 100,
+          "categories": [
+            14,
+            15,
+            18,
+            19,
+            20,
+            21,
+            22
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 17,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 15
+        }
+      }
+    },
+    {
+      "indicator": "61.53.202.74",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 3,
+          "categories": [
+            14,
+            18,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 8,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 3
+        }
+      }
+    },
+    {
+      "indicator": "182.124.9.99",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 27,
+          "categories": [
+            14,
+            15,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 9,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "115.48.146.252",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 14,
+          "categories": [
+            14,
+            15,
+            20
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 7,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 3
+        }
+      }
+    },
+    {
+      "indicator": "42.230.30.16",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 3,
+          "categories": [
+            14,
+            15
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 10,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "198.144.179.82",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 27,
+          "categories": [
+            14,
+            15,
+            18,
+            20,
+            21,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 15,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 15
+        }
+      }
+    },
+    {
+      "indicator": "62.60.226.140",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 2,
+          "categories": [
+            20
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 16,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 368
+        }
+      }
+    },
+    {
+      "indicator": "222.137.19.202",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 5,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "113.228.208.46",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 27,
+          "categories": [
+            14,
+            15,
+            18
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 9,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 3
+        }
+      }
+    },
+    {
+      "indicator": "182.124.162.58",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 5,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "27.215.84.16",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 49,
+          "categories": [
+            14,
+            15,
+            18,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 8,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "115.55.10.187",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 23,
+          "categories": [
+            14,
+            15
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 9,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "123.14.57.190",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 36,
+          "categories": [
+            14,
+            18,
+            21
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 8,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "61.53.218.29",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 20,
+          "categories": [
+            14,
+            15
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 8,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 1
+        }
+      }
+    },
+    {
+      "indicator": "217.60.241.32",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 12,
+          "categories": [
+            14,
+            20,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 13,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 13
+        }
+      }
+    },
+    {
+      "indicator": "217.60.241.248",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 1,
+          "categories": [
+            20
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 13,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 3
+        }
+      }
+    },
+    {
+      "indicator": "217.60.241.142",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 1,
+          "categories": [
+            20
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 3,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "77.83.39.9",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 8,
+          "categories": [
+            7,
+            20
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 9,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 2
+        }
+      }
+    },
+    {
+      "indicator": "77.83.39.66",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 1,
+          "categories": [
+            20
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 11,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 3
+        }
+      }
+    },
+    {
+      "indicator": "94.154.32.238",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 6,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 1
+        }
+      }
+    },
+    {
+      "indicator": "62.60.249.165",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 2,
+          "categories": [
+            14,
+            22
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 11,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 13
+        }
+      }
+    },
+    {
+      "indicator": "45.38.249.63",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 14,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 11
+        }
+      }
+    },
+    {
+      "indicator": "2.26.81.46",
+      "type": "ip",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 1,
+          "categories": [
+            20,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 12,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 20
+        }
+      }
+    },
+    {
+      "indicator": "newstan.online",
+      "type": "domain",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 19,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 32
+        }
+      }
+    },
+    {
+      "indicator": "lomeqpe.com",
+      "type": "domain",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 13,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 1
+        }
+      }
+    },
+    {
+      "indicator": "thu-iphone-07.cfd",
+      "type": "domain",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 9,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 3
+        }
+      }
+    },
+    {
+      "indicator": "revengegrompegroups.pl",
+      "type": "domain",
+      "expected": "malicious",
+      "source": "URLhaus",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 4,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 1
+        }
+      }
+    },
+    {
+      "indicator": "8.8.8.8",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Google Public DNS",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            3,
+            4,
+            14,
+            15,
+            18,
+            19,
+            20,
+            21,
+            22
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "8.8.4.4",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Google Public DNS",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            14,
+            15,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 2,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "1.1.1.1",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Cloudflare",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            4,
+            5,
+            10,
+            14,
+            15,
+            18,
+            19,
+            20,
+            21,
+            22
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "1.0.0.1",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Cloudflare",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            4,
+            14,
+            15,
+            18,
+            19,
+            20,
+            21
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "9.9.9.9",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Quad9",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            4,
+            18,
+            20,
+            22
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "208.67.222.222",
+      "type": "ip",
+      "expected": "benign",
+      "source": "OpenDNS",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            15,
+            21
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 1,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "208.67.220.220",
+      "type": "ip",
+      "expected": "benign",
+      "source": "OpenDNS",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            4,
+            14
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "4.2.2.2",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Level3/CenturyLink",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "168.63.129.16",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Microsoft Azure",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 1,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "13.107.42.14",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Microsoft",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "142.250.80.14",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Google",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "151.101.1.140",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Fastly",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            14,
+            18,
+            22
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "104.16.132.229",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Cloudflare",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": [
+            2,
+            7,
+            10,
+            11,
+            14
+          ]
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "199.232.28.133",
+      "type": "ip",
+      "expected": "benign",
+      "source": "Fastly",
+      "abuse": {
+        "source": "abuseipdb",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "score": 0,
+          "categories": []
+        }
+      },
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "google.com",
+      "type": "domain",
+      "expected": "benign",
+      "source": "N/A",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 1,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "cloudflare.com",
+      "type": "domain",
+      "expected": "benign",
+      "source": "N/A",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "microsoft.com",
+      "type": "domain",
+      "expected": "benign",
+      "source": "N/A",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "apple.com",
+      "type": "domain",
+      "expected": "benign",
+      "source": "N/A",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "wikipedia.org",
+      "type": "domain",
+      "expected": "benign",
+      "source": "N/A",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    },
+    {
+      "indicator": "github.com",
+      "type": "domain",
+      "expected": "benign",
+      "source": "N/A",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": true,
+          "url_count": 7934
+        }
+      }
+    },
+    {
+      "indicator": "mozilla.org",
+      "type": "domain",
+      "expected": "benign",
+      "source": "N/A",
+      "abuse": null,
+      "vt": {
+        "source": "virustotal",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "malicious": 0,
+          "total": 91
+        }
+      },
+      "urlhaus": {
+        "source": "urlhaus",
+        "ok": true,
+        "error": null,
+        "raw": {
+          "listed": false,
+          "url_count": 0
+        }
+      }
+    }
+  ]
+}

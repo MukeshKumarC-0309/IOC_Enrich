@@ -148,7 +148,9 @@ ioc_enrich/
 └── pipeline.py        # orchestrator: enrich(indicator) → report dict
 
 DESIGN.md              # full design specification (source of truth)
-verify.py              # Phase 4 verification harness
+verify.py              # verification harness (pass/fail vs labels)
+evaluate.py            # evaluation harness (capture + offline metrics)
+EVAL.md                # generated evaluation report
 phase4_test_indicators.csv   # labelled known-good / known-bad indicators
 ```
 
@@ -163,3 +165,22 @@ python verify.py phase4_test_indicators.csv
 
 It paces requests for VirusTotal's ~4 req/min free-tier limit, so a full run
 takes several minutes.
+
+## Evaluation
+
+An offline, reproducible evaluation harness measures accuracy against the same
+labelled set. It captures each source's raw response once, then computes metrics
+by replaying them through the real aggregation logic — so results never drift and
+threshold sweeps cost no API calls.
+
+```bash
+python evaluate.py capture   # snapshot live responses -> eval_fixtures.json
+python evaluate.py report    # offline metrics -> EVAL.md
+```
+
+Full-pipeline results across 58 indicators: **precision 1.000, recall 0.973,
+F1 0.986**, with zero false positives on benign infrastructure. The per-source
+threshold sweeps quantify why aggregation is needed — at their default
+thresholds AbuseIPDB alone reaches only 0.06 recall and VirusTotal alone 0.43,
+versus 0.973 for the combined pipeline at no precision cost. Full breakdown in
+[`EVAL.md`](EVAL.md).
