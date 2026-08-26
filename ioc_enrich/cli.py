@@ -8,6 +8,7 @@ Exit codes reflect whether the TOOL succeeded, not what verdict it found
     0  assessment produced (malicious / suspicious / clean)
     1  status "error" — sources unreachable, no assessment possible
     2  invalid input — not a valid IP or domain
+    3  not enrichable — a private/reserved IP (well-formed but out of scope)
 """
 from __future__ import annotations
 
@@ -16,6 +17,7 @@ import json
 import os
 import sys
 
+from .indicator import NotEnrichableError
 from .pipeline import enrich
 from .render import render_human
 
@@ -67,9 +69,12 @@ def main(argv=None) -> int:
     except Exception:
         pass
 
-    # Invalid input (classify raises ValueError) -> exit 2, before any output.
+    # Refusals happen before any output: private/reserved IP -> 3, malformed -> 2.
     try:
         report = enrich(args.indicator)
+    except NotEnrichableError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 3
     except ValueError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2

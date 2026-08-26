@@ -13,7 +13,7 @@ from __future__ import annotations
 from .aggregate import aggregate
 from .attack import map_techniques
 from .clients import abuseipdb, urlhaus, virustotal
-from .indicator import IP, classify
+from .indicator import IP, NotEnrichableError, classify, is_non_routable
 from .recommend import recommend
 from .report import build_report
 
@@ -21,9 +21,18 @@ from .report import build_report
 def enrich(indicator: str) -> dict:
     """Enrich a single IP or domain and return the §7 report dict.
 
-    Raises ``ValueError`` if ``indicator`` is neither a valid IP nor domain.
+    Raises ``ValueError`` if ``indicator`` is neither a valid IP nor domain,
+    and ``NotEnrichableError`` for a private/reserved IP (§10.I).
     """
     indicator_type, target = classify(indicator)
+
+    # Private/reserved IPs are out of scope and must never be sent to
+    # third-party APIs (data exposure + wasted quota) — refuse before querying.
+    if indicator_type == IP and is_non_routable(target):
+        raise NotEnrichableError(
+            f"{target} is a private/reserved address; enrichment applies only "
+            f"to routable indicators"
+        )
 
     # --- Query the sources ---------------------------------------------------
     # AbuseIPDB is IP-only; skip it for domains (§10.A).

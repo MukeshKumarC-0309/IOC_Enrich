@@ -19,6 +19,9 @@ ATT&CK techniques, and prints an analyst-readable triage recommendation.
   raw JSON with `--json` for scripting.
 - **Analyst-friendly input** — accepts defanged indicators (`evil[.]com`,
   `hxxp://bad[.]site`), normalizing them before lookup.
+- **Safe + resilient** — refuses private/reserved IPs (never leaks internal
+  addressing to third-party APIs) and retries transient API failures
+  (429 / 5xx / timeouts) with bounded backoff.
 
 ## Requirements
 
@@ -85,6 +88,7 @@ Exit codes reflect whether the **tool** succeeded, not what verdict it found
 | `0` | Assessment produced (malicious / suspicious / clean) |
 | `1` | `status: "error"` — sources unreachable, no assessment possible |
 | `2` | Invalid input — not a valid IP or domain |
+| `3` | Not enrichable — a private/reserved IP (well-formed but out of scope) |
 
 ## Output
 

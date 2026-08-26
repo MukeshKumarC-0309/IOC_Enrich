@@ -20,6 +20,7 @@ from . import (
     ERR_TIMEOUT,
     err_result,
     ok_result,
+    request_with_retries,
     status_error,
 )
 
@@ -43,11 +44,14 @@ def check(ip: str) -> dict:
         "verbose": "",  # include the reports array (needed for category IDs)
     }
     try:
-        resp = requests.get(
-            config.ABUSEIPDB_URL,
-            headers=headers,
-            params=params,
-            timeout=config.HTTP_TIMEOUT,
+        resp = request_with_retries(
+            lambda: requests.get(
+                config.ABUSEIPDB_URL,
+                headers=headers,
+                params=params,
+                timeout=config.HTTP_TIMEOUT,
+            ),
+            retries=config.HTTP_RETRIES,
         )
     except requests.Timeout:
         return err_result(_SOURCE, ERR_TIMEOUT)

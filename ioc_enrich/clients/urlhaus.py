@@ -20,6 +20,7 @@ from . import (
     ERR_TIMEOUT,
     err_result,
     ok_result,
+    request_with_retries,
 )
 
 _SOURCE = "urlhaus"
@@ -36,11 +37,14 @@ def check(host: str) -> dict:
         headers["Auth-Key"] = config.URLHAUS_AUTH_KEY
 
     try:
-        resp = requests.post(
-            config.URLHAUS_HOST_URL,
-            headers=headers,
-            data={"host": host},
-            timeout=config.HTTP_TIMEOUT,
+        resp = request_with_retries(
+            lambda: requests.post(
+                config.URLHAUS_HOST_URL,
+                headers=headers,
+                data={"host": host},
+                timeout=config.HTTP_TIMEOUT,
+            ),
+            retries=config.HTTP_RETRIES,
         )
     except requests.Timeout:
         return err_result(_SOURCE, ERR_TIMEOUT)

@@ -17,6 +17,7 @@ from . import (
     ERR_TIMEOUT,
     err_result,
     ok_result,
+    request_with_retries,
     status_error,
 )
 
@@ -41,7 +42,10 @@ def check(indicator: str, indicator_type: str) -> dict:
 
     headers = {"x-apikey": config.VIRUSTOTAL_API_KEY}
     try:
-        resp = requests.get(url, headers=headers, timeout=config.HTTP_TIMEOUT)
+        resp = request_with_retries(
+            lambda: requests.get(url, headers=headers, timeout=config.HTTP_TIMEOUT),
+            retries=config.HTTP_RETRIES,
+        )
     except requests.Timeout:
         return err_result(_SOURCE, ERR_TIMEOUT)
     except requests.RequestException:

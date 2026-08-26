@@ -375,3 +375,17 @@ clicked by accident. The classifier normalizes bracketed dots/colons,
 whitespace, then validates. Refanging is **conservative** — unrecognized input
 passes through unchanged, so genuine indicators are unaffected. The report
 shows the normalized (refanged) indicator.
+
+### 10.I Non-routable IPs & transient-error retries
+
+- **Private/reserved IPs are refused before any API call.** Private, loopback,
+  link-local, reserved, multicast, and unspecified addresses (`10.0.0.1`,
+  `127.0.0.1`, `169.254.x`, …) are out of scope and — more importantly — must
+  never be sent to third-party APIs, which would leak internal addressing.
+  `enrich()` raises `NotEnrichableError`; the CLI maps it to **exit code 3**
+  (distinct from `2` = malformed input).
+- **Transient failures are retried.** HTTP 429 / 5xx and connection/timeout
+  errors are retried with bounded exponential backoff (`HTTP_RETRIES`,
+  default 2; a numeric `Retry-After` is honored, capped) before falling back to
+  the §10.D non-vote. Verdict logic is unchanged — retries only reduce spurious
+  non-votes from transient blips.

@@ -24,6 +24,8 @@ URLHAUS_AUTH_KEY = os.getenv("URLHAUS_AUTH_KEY", "")
 
 # --- HTTP settings -----------------------------------------------------------
 HTTP_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", "15"))  # seconds, per request
+# Bounded retries on transient failures (429 / 5xx / connection). 0 disables.
+HTTP_RETRIES = int(os.getenv("HTTP_RETRIES", "2"))
 
 # AbuseIPDB report lookback window (days); drives both the confidence score and
 # the returned category set. Defaulted to 90 (AbuseIPDB's own doc default).

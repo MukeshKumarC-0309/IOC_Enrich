@@ -19,6 +19,27 @@ import re
 IP = "ip"
 DOMAIN = "domain"
 
+
+class NotEnrichableError(Exception):
+    """A well-formed indicator that is out of scope for enrichment — a
+    private/reserved IP that must not be sent to third-party APIs (DESIGN
+    §10.I). Distinct from ``ValueError`` (malformed input)."""
+
+
+def is_non_routable(ip_value: str) -> bool:
+    """True for a private/reserved/loopback/link-local/multicast/unspecified
+    IP — addresses that are meaningless to enrich and must never be leaked to
+    third-party threat-intel APIs. Assumes ``ip_value`` is a valid IP string."""
+    ip = ipaddress.ip_address(ip_value)
+    return (
+        ip.is_private
+        or ip.is_loopback
+        or ip.is_link_local
+        or ip.is_reserved
+        or ip.is_multicast
+        or ip.is_unspecified
+    )
+
 # Basic RFC-1035-style domain check: dot-separated labels of letters/digits/
 # hyphens (no leading/trailing hyphen), at least two labels, max 253 chars.
 _DOMAIN_RE = re.compile(
