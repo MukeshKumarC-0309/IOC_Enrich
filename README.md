@@ -1,5 +1,7 @@
 # IOC Enrichment & Triage Tool
 
+[![CI](https://github.com/MukeshKumarC-0309/IOC_Enrich/actions/workflows/ci.yml/badge.svg)](https://github.com/MukeshKumarC-0309/IOC_Enrich/actions/workflows/ci.yml)
+
 A single-indicator (IP or domain) threat-intelligence enrichment tool. It
 queries three sources — AbuseIPDB, VirusTotal, and URLhaus — aggregates their
 verdicts with deterministic rules (no ML, no agent), maps findings to MITRE
@@ -79,6 +81,7 @@ Flags:
 |------|--------|
 | `--json` | Emit the raw JSON report instead of the human view (pipe-to-`jq` friendly) |
 | `--no-color` | Disable ANSI color (also honors the `NO_COLOR` env var; color is off automatically when output is piped) |
+| `-v`, `--verbose` | Log source queries, retries, and timing to stderr (stdout stays clean for the report) |
 
 Exit codes reflect whether the **tool** succeeded, not what verdict it found
 (a `malicious` result is still a successful run → exit 0):

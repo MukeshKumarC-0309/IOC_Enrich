@@ -1,7 +1,7 @@
 """Command-line interface — single indicator in, structured triage out.
 
 Usage:
-    python -m ioc_enrich <indicator> [--json] [--no-color]
+    python -m ioc_enrich <indicator> [--json] [--no-color] [--verbose]
 
 Exit codes reflect whether the TOOL succeeded, not what verdict it found
 (a malicious result is still a successful run -> exit 0):
@@ -14,12 +14,25 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
 import sys
 
 from .indicator import NotEnrichableError
 from .pipeline import enrich
 from .render import render_human
+
+
+def _configure_logging(verbose: bool) -> None:
+    """Send ioc_enrich logs to stderr when --verbose is set (stdout stays clean
+    for the report). Silent by default."""
+    if not verbose:
+        return
+    handler = logging.StreamHandler(sys.stderr)
+    handler.setFormatter(logging.Formatter("%(levelname)s %(name)s: %(message)s"))
+    logger = logging.getLogger("ioc_enrich")
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(handler)
 
 
 def _color_enabled(no_color_flag: bool) -> bool:
@@ -62,7 +75,15 @@ def main(argv=None) -> int:
         action="store_true",
         help="disable ANSI color in the human-readable view",
     )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="log source queries, retries, and timing to stderr",
+    )
     args = parser.parse_args(argv)
+
+    _configure_logging(args.verbose)
 
     try:
         sys.stdout.reconfigure(encoding="utf-8")

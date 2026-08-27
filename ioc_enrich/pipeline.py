@@ -10,12 +10,17 @@ AbuseIPDB is queried only for IPs (§10.A); for a domain it is passed through as
 """
 from __future__ import annotations
 
+import logging
+import time
+
 from .aggregate import aggregate
 from .attack import map_techniques
 from .clients import abuseipdb, urlhaus, virustotal
 from .indicator import IP, NotEnrichableError, classify, is_non_routable
 from .recommend import recommend
 from .report import build_report
+
+_log = logging.getLogger("ioc_enrich.pipeline")
 
 
 def enrich(indicator: str) -> dict:
@@ -35,13 +40,23 @@ def enrich(indicator: str) -> dict:
         )
 
     # --- Query the sources ---------------------------------------------------
+    started = time.monotonic()
+    _log.info("enriching %s (type=%s)", target, indicator_type)
     # AbuseIPDB is IP-only; skip it for domains (§10.A).
     abuse_result = abuseipdb.check(target) if indicator_type == IP else None
     vt_result = virustotal.check(target, indicator_type)
     urlhaus_result = urlhaus.check(target)
+    for name, res in (("abuseipdb", abuse_result), ("virustotal", vt_result),
+                      ("urlhaus", urlhaus_result)):
+        if res is None:
+            _log.debug("%-11s not queried", name)
+        else:
+            _log.debug("%-11s %s", name, "ok" if res["ok"] else res["error"])
 
     # --- Aggregate (verdict / confidence / flags) ----------------------------
     agg = aggregate(indicator_type, abuse_result, vt_result, urlhaus_result)
+    _log.info("verdict=%s status=%s confidence=%s (%.2fs)",
+              agg.verdict, agg.status, agg.confidence, time.monotonic() - started)
 
     # --- ATT&CK mapping ------------------------------------------------------
     # Evaluated on RAW source signals only — fully decoupled from aggregate.py

@@ -85,3 +85,11 @@ def test_honors_numeric_retry_after():
         sleep=sleeps.append,
     )
     assert sleeps == [3]
+
+
+def test_retry_emits_log(caplog):
+    with caplog.at_level("INFO", logger="ioc_enrich.retry"):
+        request_with_retries(
+            seq(FakeResp(503), FakeResp(200)), retries=2, sleep=lambda *_: None
+        )
+    assert any("retrying" in rec.getMessage() for rec in caplog.records)

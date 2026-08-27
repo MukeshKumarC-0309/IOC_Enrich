@@ -26,3 +26,21 @@ def test_enrich_refuses_private(raw):
     # Raised before any API call, so this runs fully offline.
     with pytest.raises(NotEnrichableError):
         enrich(raw)
+
+
+def test_enrich_logs(caplog, monkeypatch):
+    from ioc_enrich.clients import abuseipdb, urlhaus, virustotal
+
+    monkeypatch.setattr(abuseipdb, "check", lambda ip: {
+        "source": "abuseipdb", "ok": True, "error": None,
+        "raw": {"score": 0, "categories": []}})
+    monkeypatch.setattr(virustotal, "check", lambda i, t: {
+        "source": "virustotal", "ok": True, "error": None,
+        "raw": {"malicious": 0, "total": 90}})
+    monkeypatch.setattr(urlhaus, "check", lambda h: {
+        "source": "urlhaus", "ok": True, "error": None,
+        "raw": {"listed": False, "url_count": 0}})
+
+    with caplog.at_level("INFO", logger="ioc_enrich.pipeline"):
+        enrich("8.8.8.8")
+    assert any("enriching" in rec.getMessage() for rec in caplog.records)

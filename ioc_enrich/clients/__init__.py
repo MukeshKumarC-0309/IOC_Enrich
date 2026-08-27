@@ -16,9 +16,12 @@ vote" and is handled by the aggregator, never raised.
 """
 from __future__ import annotations
 
+import logging
 import time
 
 import requests
+
+_log = logging.getLogger("ioc_enrich.retry")
 
 # Transient HTTP statuses worth retrying (rate limit + server errors).
 _RETRYABLE_STATUS = frozenset({429, 500, 502, 503, 504})
@@ -75,14 +78,18 @@ def request_with_retries(
     while True:
         try:
             resp = do_request()
-        except (requests.Timeout, requests.ConnectionError):
+        except (requests.Timeout, requests.ConnectionError) as exc:
             if attempt >= retries:
                 raise
-            sleep(_backoff(attempt, base_delay, max_delay))
+            delay = _backoff(attempt, base_delay, max_delay)
+            _log.info("transient %s, retrying in %.1fs", type(exc).__name__, delay)
+            sleep(delay)
             attempt += 1
             continue
         if resp.status_code in _RETRYABLE_STATUS and attempt < retries:
-            sleep(_retry_delay(resp, attempt, base_delay, max_delay))
+            delay = _retry_delay(resp, attempt, base_delay, max_delay)
+            _log.info("HTTP %s, retrying in %.1fs", resp.status_code, delay)
+            sleep(delay)
             attempt += 1
             continue
         return resp
