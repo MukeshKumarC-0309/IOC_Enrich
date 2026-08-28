@@ -75,6 +75,9 @@ python -m ioc_enrich evil-domain.example --json
 python -m ioc_enrich 1.2.3.4 --no-color
 ```
 
+After `pip install .`, the same tool is available as the `ioc-enrich` command
+(e.g. `ioc-enrich 8.8.8.8`).
+
 Flags:
 
 | Flag | Effect |
@@ -100,6 +103,11 @@ techniques, a per-source breakdown, and the recommendation. With `--json` you
 get the full structured record (schema documented in `DESIGN.md` §7). Every
 source carries a `status` field; `not_applicable` (no data by design) is kept
 distinct from `error` / `query_error` (tried and failed).
+
+Refusals (invalid input, private/reserved IP) print a plain message to stderr;
+under `--json` they instead emit a JSON error object
+(`{"indicator", "error", "message"}`) to stdout, so a script that asked for
+JSON always receives JSON.
 
 ## How it works
 
@@ -206,3 +214,7 @@ handling — offline, no network or API keys:
 pip install -r requirements-dev.txt
 python -m pytest
 ```
+
+## License
+
+Released under the [MIT License](LICENSE).

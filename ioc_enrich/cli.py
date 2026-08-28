@@ -35,6 +35,19 @@ def _configure_logging(verbose: bool) -> None:
     logger.addHandler(handler)
 
 
+def _emit_error(indicator: str, as_json: bool, code: str, message: str, exit_code: int) -> int:
+    """Report a refusal: a JSON error object on stdout under --json (so a
+    scripting consumer always gets JSON), else a plain message on stderr."""
+    if as_json:
+        print(json.dumps(
+            {"indicator": indicator, "error": code, "message": message},
+            ensure_ascii=False,
+        ))
+    else:
+        print(f"error: {message}", file=sys.stderr)
+    return exit_code
+
+
 def _color_enabled(no_color_flag: bool) -> bool:
     """Color only for an interactive terminal, unless disabled by flag or the
     NO_COLOR convention (https://no-color.org)."""
@@ -94,11 +107,9 @@ def main(argv=None) -> int:
     try:
         report = enrich(args.indicator)
     except NotEnrichableError as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 3
+        return _emit_error(args.indicator, args.json, "not_enrichable", str(exc), 3)
     except ValueError as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 2
+        return _emit_error(args.indicator, args.json, "invalid_input", str(exc), 2)
 
     if args.json:
         print(json.dumps(report, indent=2, ensure_ascii=False))
