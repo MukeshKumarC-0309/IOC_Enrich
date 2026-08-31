@@ -57,7 +57,7 @@ sent to outside APIs), and it says so plainly when it can't get an answer.
 
 ```bash
 # 1. Clone
-git clone https://github.com/MukeshKumarC-0309/IOC_Enrich/tree/main ioc_enrich && cd ioc_enrich
+git clone https://github.com/MukeshKumarC-0309/IOC_Enrich.git ioc_enrich && cd ioc_enrich
 
 # 2. Create and activate a virtual environment
 python -m venv .venv
