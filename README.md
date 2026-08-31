@@ -7,6 +7,25 @@ queries three sources — AbuseIPDB, VirusTotal, and URLhaus — aggregates thei
 verdicts with deterministic rules (no ML, no agent), maps findings to MITRE
 ATT&CK techniques, and prints an analyst-readable triage recommendation.
 
+Security analysts constantly have to answer one question: is this IP or domain
+dangerous, and what should I do about it? Answering it means checking several
+threat-intel sources and working out what they add up to. That's slow and easy
+to get wrong when you're busy.
+
+This tool does it for you. It checks three sources that each catch different
+things — AbuseIPDB (community abuse reports), VirusTotal (antivirus engines),
+and URLhaus (a malware blocklist) — and combines their answers using fixed
+rules, not a black-box model. One source alone isn't enough: on a 58-indicator
+test set, a single source catches only 6–43% of the bad ones, while all three
+together catch **97% with no false alarms**.
+
+Two things make it trustworthy. Every verdict follows a clear rule, so you can
+always see why it decided what it did. And when the sources disagree, it flags
+the case for a human instead of quietly marking it "clean" — because missing a
+real threat is worse than double-checking a false one. It also knows its
+limits: it won't look up private or internal IPs (so your own network is never
+sent to outside APIs), and it says so plainly when it can't get an answer.
+
 ## Features
 
 - **Three-source enrichment** — AbuseIPDB (community abuse score), VirusTotal
