@@ -38,7 +38,7 @@ ATT&CK techniques, and prints an analyst-readable triage recommendation.
 
 ```bash
 # 1. Clone
-git clone <your-repo-url> ioc_enrich && cd ioc_enrich
+git clone [<your-repo-url>](https://github.com/MukeshKumarC-0309/IOC_Enrich/tree/main) ioc_enrich && cd ioc_enrich
 
 # 2. Create and activate a virtual environment
 python -m venv .venv
