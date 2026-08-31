@@ -197,8 +197,7 @@ python evaluate.py capture   # snapshot live responses -> eval_fixtures.json
 python evaluate.py report    # offline metrics -> EVAL.md
 ```
 
-Full-pipeline results across 58 indicators: **precision 1.000, recall 0.973,
-F1 0.986**, with zero false positives on benign infrastructure. The per-source
+Full-pipeline results on a labelled set of 58 indicators: recall 0.973, zero false positives observed (precision 1.000 on this sample — small enough that the true false-positive rate could differ; see Limitations). Per-source thresholds show why aggregation matters: AbuseIPDB alone reaches 0.06 recall, VirusTotal alone 0.43. The per-source
 threshold sweeps quantify why aggregation is needed — at their default
 thresholds AbuseIPDB alone reaches only 0.06 recall and VirusTotal alone 0.43,
 versus 0.973 for the combined pipeline at no precision cost. Full breakdown in
