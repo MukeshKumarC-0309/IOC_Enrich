@@ -38,7 +38,7 @@ ATT&CK techniques, and prints an analyst-readable triage recommendation.
 
 ```bash
 # 1. Clone
-git clone [<your-repo-url>](https://github.com/MukeshKumarC-0309/IOC_Enrich/tree/main) ioc_enrich && cd ioc_enrich
+git clone https://github.com/MukeshKumarC-0309/IOC_Enrich/tree/main ioc_enrich && cd ioc_enrich
 
 # 2. Create and activate a virtual environment
 python -m venv .venv
@@ -197,10 +197,7 @@ python evaluate.py capture   # snapshot live responses -> eval_fixtures.json
 python evaluate.py report    # offline metrics -> EVAL.md
 ```
 
-Full-pipeline results on a labelled set of 58 indicators: recall 0.973, zero false positives observed (precision 1.000 on this sample — small enough that the true false-positive rate could differ; see Limitations). Per-source thresholds show why aggregation matters: AbuseIPDB alone reaches 0.06 recall, VirusTotal alone 0.43. The per-source
-threshold sweeps quantify why aggregation is needed — at their default
-thresholds AbuseIPDB alone reaches only 0.06 recall and VirusTotal alone 0.43,
-versus 0.973 for the combined pipeline at no precision cost. Full breakdown in
+Full-pipeline results on a labelled set of 58 indicators: recall 0.973, zero false positives observed (precision 1.000 on this sample — small enough that the true false-positive rate could differ; see Limitations). Per-source thresholds show why aggregation matters: AbuseIPDB alone reaches 0.06 recall, VirusTotal alone 0.43. Full breakdown in
 [`EVAL.md`](EVAL.md).
 
 ## Testing
