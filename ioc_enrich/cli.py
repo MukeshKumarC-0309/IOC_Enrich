@@ -15,12 +15,11 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import os
 import sys
 
 from .indicator import NotEnrichableError
 from .pipeline import enrich
-from .render import render_human
+from .render import build_view, make_console
 
 
 def _configure_logging(verbose: bool) -> None:
@@ -46,29 +45,6 @@ def _emit_error(indicator: str, as_json: bool, code: str, message: str, exit_cod
     else:
         print(f"error: {message}", file=sys.stderr)
     return exit_code
-
-
-def _color_enabled(no_color_flag: bool) -> bool:
-    """Color only for an interactive terminal, unless disabled by flag or the
-    NO_COLOR convention (https://no-color.org)."""
-    if no_color_flag or os.environ.get("NO_COLOR"):
-        return False
-    return sys.stdout.isatty()
-
-
-def _enable_windows_ansi() -> None:
-    """Best-effort: turn on ANSI processing for legacy Windows consoles.
-    Modern terminals already support it; failure here just means no color."""
-    if os.name != "nt":
-        return
-    try:
-        import ctypes
-
-        kernel32 = ctypes.windll.kernel32
-        # -11 = STD_OUTPUT_HANDLE; 7 = existing modes | VIRTUAL_TERMINAL_PROCESSING
-        kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
-    except Exception:
-        pass
 
 
 def main(argv=None) -> int:
@@ -114,10 +90,7 @@ def main(argv=None) -> int:
     if args.json:
         print(json.dumps(report, indent=2, ensure_ascii=False))
     else:
-        color = _color_enabled(args.no_color)
-        if color:
-            _enable_windows_ansi()
-        print(render_human(report, color=color))
+        make_console(args.no_color).print(build_view(report))
 
     # Exit code reflects tool success, not the verdict.
     return 1 if report["status"] == "error" else 0

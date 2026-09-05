@@ -1,109 +1,137 @@
 """Human-readable rendering of a report dict (DESIGN §7) for the CLI.
 
-Produces the formatted "IOC TRIAGE" view. ANSI color is applied only when the
-caller passes ``color=True`` (the CLI enables it for interactive terminals and
-disables it when piped / on ``--no-color`` / ``NO_COLOR``). Only verdict words
-are colored — everything else stays the terminal's default.
+Uses `rich` for a themed, boxed terminal view: a panel whose border is coloured
+by severity, a verdict line, and an aligned sources table. Colour is applied
+only for a real terminal — rich auto-detects, degrades to plain text when
+piped, and honours the ``NO_COLOR`` convention. The ``--json`` path never
+touches this module.
 """
 from __future__ import annotations
 
+from rich import box
+from rich.console import Console, Group, RenderableType
+from rich.panel import Panel
+from rich.table import Table
+from rich.text import Text
+from rich.theme import Theme
+
 from .attack import technique_names
 
-_WIDTH = 60
-_LINE = "─" * _WIDTH
+# One cohesive theme: verdict severities, structural labels, and accents.
+THEME = Theme(
+    {
+        "malicious": "bold red",
+        "suspicious": "bold yellow",
+        "clean": "bold green",
+        "unknown": "bold magenta",
+        "label": "bold cyan",
+        "muted": "dim",
+        "flag": "yellow",
+        "tech": "bright_blue",
+        "rec": "italic",
+    }
+)
 
-_RESET = "\033[0m"
-_BOLD = "\033[1m"
-_COLORS = {
-    "malicious": "\033[31m",   # red
-    "suspicious": "\033[33m",  # amber
-    "clean": "\033[32m",       # green
-    "_error": "\033[35m",      # magenta (null / error verdict)
-}
-
-
-def _verdict_key(verdict) -> str:
-    return verdict if verdict in ("malicious", "suspicious", "clean") else "_error"
-
-
-def _c(text: str, key: str, color: bool, bold: bool = False) -> str:
-    if not color:
-        return text
-    code = _COLORS.get(key, "")
-    if not code:
-        return text
-    return f"{(_BOLD + code) if bold else code}{text}{_RESET}"
+_BORDER = {"malicious": "red", "suspicious": "yellow", "clean": "green"}
 
 
-def _pad_verdict(verdict: str, width: int, color: bool) -> str:
-    """Color the verdict word but pad by its PLAIN length (ANSI codes are
-    zero-width to the terminal, so pad before the escape codes are added)."""
-    colored = _c(verdict, _verdict_key(verdict), color)
-    return colored + " " * max(1, width - len(verdict))
+def make_console(no_color: bool = False) -> Console:
+    """A console bound to the theme. rich handles TTY detection / NO_COLOR;
+    ``no_color=True`` forces plain output."""
+    return Console(theme=THEME, no_color=no_color, highlight=False)
 
 
-def _abuse(s: dict, color: bool) -> str:
-    if s["status"] == "ok":
-        return f'{_pad_verdict(s["verdict"], 12, color)}score {s["score"]}'
-    if s["status"] == "not_applicable":
-        return "n/a         (domains unsupported)"
-    return f'error       ({s.get("reason")})'
+def _style(verdict) -> str:
+    return verdict if verdict in ("malicious", "suspicious", "clean") else "unknown"
 
 
-def _vt(s: dict, color: bool) -> str:
-    if s["status"] == "ok":
-        return f'{_pad_verdict(s["verdict"], 12, color)}{s["malicious_ratio"]}'
-    return f'error       ({s.get("reason")})'
+def _sources_table(report: dict) -> Table:
+    table = Table(box=box.SIMPLE_HEAD, show_edge=False, pad_edge=False, expand=False)
+    table.add_column("Source", style="muted", no_wrap=True)
+    table.add_column("Verdict", no_wrap=True)
+    table.add_column("Detail", style="muted")
+    s = report["sources"]
+
+    ab = s["abuseipdb"]
+    if ab["status"] == "ok":
+        table.add_row("AbuseIPDB", Text(ab["verdict"], style=_style(ab["verdict"])),
+                      f"score {ab['score']}")
+    elif ab["status"] == "not_applicable":
+        table.add_row("AbuseIPDB", Text("n/a", style="muted"), "domains unsupported")
+    else:
+        table.add_row("AbuseIPDB", Text("error", style="unknown"), f"({ab.get('reason')})")
+
+    vt = s["virustotal"]
+    if vt["status"] == "ok":
+        table.add_row("VirusTotal", Text(vt["verdict"], style=_style(vt["verdict"])),
+                      vt["malicious_ratio"])
+    else:
+        table.add_row("VirusTotal", Text("error", style="unknown"), f"({vt.get('reason')})")
+
+    uh = s["urlhaus"]
+    if uh["status"] == "match":
+        table.add_row("URLhaus", Text("match", style="malicious"), f"{uh['url_count']} URLs")
+    elif uh["status"] == "not_found":
+        table.add_row("URLhaus", Text("not_found", style="muted"), "")
+    else:
+        table.add_row("URLhaus", Text("error", style="unknown"), f"({uh.get('reason')})")
+
+    return table
 
 
-def _urlhaus(s: dict) -> str:
-    st = s["status"]
-    if st == "match":
-        return f'match       {s["url_count"]} URLs'
-    if st == "not_found":
-        return "not_found"
-    return f'error       ({s.get("reason")})'
-
-
-def render_human(report: dict, color: bool = False) -> str:
-    """Render a report dict as the formatted human triage view."""
-    r = report
-    verdict_disp = (r["aggregated_verdict"] or "error / no data").upper()
-    verdict_col = _c(verdict_disp, _verdict_key(r["aggregated_verdict"]), color, bold=True)
-    verdict_pad = " " * max(1, 22 - len(verdict_disp))
-    confidence = r["confidence"] or "—"
+def build_view(report: dict) -> RenderableType:
+    """Build the themed panel for a report dict."""
+    verdict = report["aggregated_verdict"]
+    verdict_disp = (verdict or "error / no data").upper()
+    confidence = report["confidence"] or "—"
 
     flags = []
-    if r["disagreement"]:
+    if report["disagreement"]:
         flags.append("disagreement")
-    if r["urlhaus_override"]:
+    if report["urlhaus_override"]:
         flags.append("urlhaus_override")
-    if r.get("urlhaus_high_volume_host"):
+    if report.get("urlhaus_high_volume_host"):
         flags.append("high_volume_host")
-    if r["single_source"]:
+    if report["single_source"]:
         flags.append("single_source")
-    flags_s = ", ".join(flags) if flags else "—"
+    flags_text = Text(", ".join(flags), style="flag") if flags else Text("—", style="muted")
 
-    techniques = r["mitre_technique"]
-    tech_s = ", ".join(technique_names(techniques)) if techniques else "—"
+    techs = report["mitre_technique"]
+    tech_text = (Text(" · ".join(technique_names(techs)), style="tech")
+                 if techs else Text("—", style="muted"))
 
-    lines = [
-        _LINE,
-        f'  IOC TRIAGE   ·   {r["indicator"]}  ({r["indicator_type"]})',
-        _LINE,
-        f'  VERDICT       {verdict_col}{verdict_pad}confidence: {confidence}',
-        f'  FLAGS         {flags_s}',
-        f'  ATT&CK        {tech_s}',
-        "",
-        "  SOURCES",
-        f'    AbuseIPDB    {_abuse(r["sources"]["abuseipdb"], color)}',
-        f'    VirusTotal   {_vt(r["sources"]["virustotal"], color)}',
-        f'    URLhaus      {_urlhaus(r["sources"]["urlhaus"])}',
-        "",
-        "  RECOMMENDATION",
-        f'    {r["recommendation"]}',
-        "",
-        f'  queried {r["timestamp"]}',
-        _LINE,
-    ]
-    return "\n".join(lines)
+    header = Table.grid(padding=(0, 2))
+    header.add_column(style="label", justify="left")
+    header.add_column()
+    header.add_row("VERDICT", Text.assemble(
+        Text("• ", style=_style(verdict)),
+        Text(verdict_disp, style=_style(verdict)),
+        Text(f"    confidence: {confidence}", style="muted"),
+    ))
+    header.add_row("FLAGS", flags_text)
+    header.add_row("ATT&CK", tech_text)
+
+    recommendation = Text.assemble(
+        Text("» ", style=_style(verdict)),
+        Text(report["recommendation"], style="rec"),
+    )
+
+    body = Group(header, "", _sources_table(report), "", recommendation)
+
+    title = Text.assemble(
+        Text("IOC TRIAGE", style="label"),
+        Text("  ·  "),
+        Text(report["indicator"], style="bold"),
+        Text(f"  ({report['indicator_type']})", style="muted"),
+    )
+    subtitle = Text(f"queried {report['timestamp']}", style="muted")
+
+    return Panel(
+        body,
+        title=title,
+        subtitle=subtitle,
+        border_style=_BORDER.get(verdict, "magenta"),
+        box=box.ROUNDED,
+        padding=(1, 2),
+        width=66,
+    )
