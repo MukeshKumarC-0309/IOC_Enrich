@@ -83,7 +83,7 @@ python -c "from ioc_enrich import config as c; print({'abuseipdb': bool(c.ABUSEI
 ## Usage
 
 ```bash
-python -m ioc_enrich <indicator> [--json] [--no-color]
+python -m ioc_enrich <indicator> [--json | --quiet] [--no-color] [--verbose]
 ```
 
 Examples:
@@ -102,6 +102,7 @@ Flags:
 | Flag | Effect |
 |------|--------|
 | `--json` | Emit the raw JSON report instead of the human view (pipe-to-`jq` friendly) |
+| `-q`, `--quiet` | Print a single tab-separated `<indicator>\t<verdict>` line (mutually exclusive with `--json`) |
 | `--no-color` | Disable ANSI color (also honors the `NO_COLOR` env var; color is off automatically when output is piped) |
 | `-v`, `--verbose` | Log source queries, retries, and timing to stderr (stdout stays clean for the report) |
 
@@ -114,6 +115,7 @@ Exit codes reflect whether the **tool** succeeded, not what verdict it found
 | `1` | `status: "error"` — sources unreachable, no assessment possible |
 | `2` | Invalid input — not a valid IP or domain |
 | `3` | Not enrichable — a private/reserved IP (well-formed but out of scope) |
+| `130` | Interrupted (Ctrl+C) |
 
 ## Output
 

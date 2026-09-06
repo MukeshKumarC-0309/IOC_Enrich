@@ -1,6 +1,8 @@
 """CLI-level behavior: exit codes and structured --json error output."""
 import json
 
+import pytest
+
 from ioc_enrich.cli import main
 
 
@@ -63,3 +65,37 @@ def test_no_key_hint_when_keys_present(capsys, monkeypatch):
     code = cli.main(["1.2.3.4"])
     assert code == 1
     assert "hint:" not in capsys.readouterr().err
+
+
+def test_quiet_output(capsys, monkeypatch):
+    import ioc_enrich.cli as cli
+    monkeypatch.setattr(cli, "enrich", lambda i: {
+        "indicator": "1.2.3.4", "aggregated_verdict": "malicious", "status": "ok"})
+    code = cli.main(["1.2.3.4", "--quiet"])
+    assert code == 0
+    assert capsys.readouterr().out.strip() == "1.2.3.4\tmalicious"
+
+
+def test_quiet_error(capsys, monkeypatch):
+    import ioc_enrich.cli as cli
+    monkeypatch.setattr(cli, "enrich", lambda i: _error_report())
+    code = cli.main(["1.2.3.4", "--quiet"])
+    assert code == 1
+    assert capsys.readouterr().out.strip() == "1.2.3.4\terror"
+
+
+def test_json_and_quiet_are_mutually_exclusive():
+    with pytest.raises(SystemExit):
+        main(["1.2.3.4", "--json", "--quiet"])
+
+
+def test_keyboard_interrupt_exits_130(capsys, monkeypatch):
+    import ioc_enrich.cli as cli
+
+    def boom(indicator):
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(cli, "enrich", boom)
+    code = cli.main(["1.2.3.4"])
+    assert code == 130
+    assert "aborted" in capsys.readouterr().err

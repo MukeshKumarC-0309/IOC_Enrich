@@ -1,14 +1,15 @@
 """Command-line interface — single indicator in, structured triage out.
 
 Usage:
-    python -m ioc_enrich <indicator> [--json] [--no-color] [--verbose]
+    python -m ioc_enrich <indicator> [--json | --quiet] [--no-color] [--verbose]
 
 Exit codes reflect whether the TOOL succeeded, not what verdict it found
 (a malicious result is still a successful run -> exit 0):
-    0  assessment produced (malicious / suspicious / clean)
-    1  status "error" — sources unreachable, no assessment possible
-    2  invalid input — not a valid IP or domain
-    3  not enrichable — a private/reserved IP (well-formed but out of scope)
+    0    assessment produced (malicious / suspicious / clean)
+    1    status "error" — sources unreachable, no assessment possible
+    2    invalid input — not a valid IP or domain
+    3    not enrichable — a private/reserved IP (well-formed but out of scope)
+    130  interrupted (Ctrl+C)
 """
 from __future__ import annotations
 
@@ -89,10 +90,17 @@ def main(argv=None) -> int:
         "AbuseIPDB, VirusTotal, and URLhaus.",
     )
     parser.add_argument("indicator", help="an IP address or domain to look up")
-    parser.add_argument(
+    output = parser.add_mutually_exclusive_group()
+    output.add_argument(
         "--json",
         action="store_true",
         help="emit the raw JSON report instead of the human-readable view",
+    )
+    output.add_argument(
+        "-q",
+        "--quiet",
+        action="store_true",
+        help="print a single tab-separated '<indicator>\\t<verdict>' line",
     )
     parser.add_argument(
         "--no-color",
@@ -117,6 +125,9 @@ def main(argv=None) -> int:
     # Refusals happen before any output: private/reserved IP -> 3, malformed -> 2.
     try:
         report = _run_enrich(args.indicator, args.verbose)
+    except KeyboardInterrupt:
+        print("\naborted", file=sys.stderr)
+        return 130
     except NotEnrichableError as exc:
         return _emit_error(args.indicator, args.json, "not_enrichable", str(exc), 3)
     except ValueError as exc:
@@ -124,6 +135,8 @@ def main(argv=None) -> int:
 
     if args.json:
         print(json.dumps(report, indent=2, ensure_ascii=False))
+    elif args.quiet:
+        print(f"{report['indicator']}\t{report['aggregated_verdict'] or 'error'}")
     else:
         make_console(args.no_color).print(build_view(report))
 
