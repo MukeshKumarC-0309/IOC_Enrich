@@ -25,3 +25,41 @@ def test_private_ip_text_error_goes_to_stderr(capsys):
     assert code == 3
     assert captured.out == ""  # nothing on stdout in the human path
     assert "private/reserved" in captured.err
+
+
+def _error_report():
+    return {
+        "indicator": "1.2.3.4", "indicator_type": "ip",
+        "sources": {
+            "abuseipdb": {"status": "error", "reason": "invalid_key"},
+            "virustotal": {"status": "error", "reason": "invalid_key"},
+            "urlhaus": {"status": "query_error", "reason": "http_error"},
+        },
+        "status": "error", "aggregated_verdict": None, "urlhaus_override": False,
+        "urlhaus_high_volume_host": False, "disagreement": False,
+        "single_source": False, "mitre_technique": [], "confidence": None,
+        "recommendation": "Insufficient data — sources unavailable; retry or investigate manually",
+        "timestamp": "t",
+    }
+
+
+def test_key_hint_when_keys_missing(capsys, monkeypatch):
+    import ioc_enrich.cli as cli
+    monkeypatch.setattr(cli, "enrich", lambda i: _error_report())
+    monkeypatch.setattr(cli.config, "ABUSEIPDB_API_KEY", "")
+    monkeypatch.setattr(cli.config, "VIRUSTOTAL_API_KEY", "")
+    monkeypatch.setattr(cli.config, "URLHAUS_AUTH_KEY", "")
+    code = cli.main(["1.2.3.4"])
+    assert code == 1
+    assert "no API key set" in capsys.readouterr().err
+
+
+def test_no_key_hint_when_keys_present(capsys, monkeypatch):
+    import ioc_enrich.cli as cli
+    monkeypatch.setattr(cli, "enrich", lambda i: _error_report())
+    monkeypatch.setattr(cli.config, "ABUSEIPDB_API_KEY", "x")
+    monkeypatch.setattr(cli.config, "VIRUSTOTAL_API_KEY", "x")
+    monkeypatch.setattr(cli.config, "URLHAUS_AUTH_KEY", "x")
+    code = cli.main(["1.2.3.4"])
+    assert code == 1
+    assert "hint:" not in capsys.readouterr().err

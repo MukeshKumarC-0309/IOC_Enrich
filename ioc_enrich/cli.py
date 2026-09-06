@@ -17,9 +17,44 @@ import json
 import logging
 import sys
 
+from rich.console import Console
+
+from . import config
 from .indicator import NotEnrichableError
 from .pipeline import enrich
 from .render import build_view, make_console
+
+
+def _run_enrich(indicator: str, verbose: bool) -> dict:
+    """Run enrich() behind a spinner shown on stderr. Skipped under --verbose
+    (logging is the feedback then); rich auto-suppresses when stderr is not a
+    terminal, so piped/redirected runs stay clean."""
+    if verbose:
+        return enrich(indicator)
+    with Console(stderr=True).status(f"Enriching {indicator}…", spinner="dots"):
+        return enrich(indicator)
+
+
+def _maybe_key_hint(report: dict) -> None:
+    """On an all-sources-failed result, if any API key is unset, nudge the user
+    toward configuring .env — the common first-run confusion."""
+    if report["status"] != "error":
+        return
+    missing = [
+        name
+        for name, value in (
+            ("ABUSEIPDB_API_KEY", config.ABUSEIPDB_API_KEY),
+            ("VIRUSTOTAL_API_KEY", config.VIRUSTOTAL_API_KEY),
+            ("URLHAUS_AUTH_KEY", config.URLHAUS_AUTH_KEY),
+        )
+        if not value
+    ]
+    if missing:
+        print(
+            f"hint: no API key set for {', '.join(missing)} — copy .env.example "
+            f"to .env and add your keys (see the README).",
+            file=sys.stderr,
+        )
 
 
 def _configure_logging(verbose: bool) -> None:
@@ -81,7 +116,7 @@ def main(argv=None) -> int:
 
     # Refusals happen before any output: private/reserved IP -> 3, malformed -> 2.
     try:
-        report = enrich(args.indicator)
+        report = _run_enrich(args.indicator, args.verbose)
     except NotEnrichableError as exc:
         return _emit_error(args.indicator, args.json, "not_enrichable", str(exc), 3)
     except ValueError as exc:
@@ -93,4 +128,7 @@ def main(argv=None) -> int:
         make_console(args.no_color).print(build_view(report))
 
     # Exit code reflects tool success, not the verdict.
-    return 1 if report["status"] == "error" else 0
+    if report["status"] == "error":
+        _maybe_key_hint(report)
+        return 1
+    return 0
