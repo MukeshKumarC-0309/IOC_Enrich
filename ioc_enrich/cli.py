@@ -21,6 +21,7 @@ import sys
 from rich.console import Console
 
 from . import config
+from .banner import print_banner
 from .indicator import NotEnrichableError
 from .pipeline import enrich
 from .render import build_view, make_console
@@ -121,6 +122,9 @@ def main(argv=None) -> int:
         sys.stdout.reconfigure(encoding="utf-8")
     except Exception:
         pass
+
+    # Startup wordmark — stderr only, so stdout stays clean for the report.
+    print_banner(Console(stderr=True, no_color=args.no_color))
 
     # Refusals happen before any output: private/reserved IP -> 3, malformed -> 2.
     try:
